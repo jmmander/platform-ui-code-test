@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Provider } from '../provider';
+import { PROVIDERS } from '../providers-list'
 
 @Component({
   selector: 'app-list',
@@ -8,45 +9,28 @@ import { Provider } from '../provider';
 })
 export class ListComponent implements OnInit {
 
+  providers = PROVIDERS;
   public selectedProviders: Provider[] = [];
-  public unselectedProviders: Provider[] = [
-    {
-      id: '1',
-      name: 'John',
-      address: '123 Greenway Blvd',
-      phone: '8991234321'
-    },
-    {
-      id: '2',
-      name: 'Mary',
-      address: '443 Windwhisper Road',
-      phone: '2233211903'
-    },
-    {
-      id: '3',
-      name: 'Jason',
-      address: '9992 Pumpkin Hollow',
-      phone: '4343219384'
-    }
-  ];
-  
+  public unselectedProviders = this.providers;
 
-  onSave(selectedProvider: Provider) {
-    console.log("selected " + selectedProvider.name);
-    this.selectedProviders.push(selectedProvider);
-    var index = this.unselectedProviders.indexOf(selectedProvider);
-    this.unselectedProviders.splice(index, 1);
-    }
-
-  onRemove(removedProvider: Provider) {
-    console.log("removing " + removedProvider.name);
-    this.unselectedProviders.push(removedProvider);
-    var index = this.selectedProviders.indexOf(removedProvider);
-    this.selectedProviders.splice(index, 1);
-  }
 
   constructor() {}
 
   ngOnInit() {}
 
-}
+  onSave(selectedProvider: Provider) {
+      console.log(selectedProvider);
+      console.log("moving to saved")
+      this.selectedProviders.push(selectedProvider);
+      var index = this.unselectedProviders.indexOf(selectedProvider);
+      this.unselectedProviders.splice(index, 1);
+  }
+
+  onRemove(selectedProvider: Provider){this.unselectedProviders.push(selectedProvider);
+      var index = this.selectedProviders.indexOf(selectedProvider);
+      this.selectedProviders.splice(index, 1);
+    }
+  }
+
+
+

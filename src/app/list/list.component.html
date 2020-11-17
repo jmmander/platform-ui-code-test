@@ -2,26 +2,16 @@
   <h2>Providers</h2>
   <ul class="providers"> 
     <li *ngFor="let provider of unselectedProviders">
-      <div class="card">
-        <div class="id">ID: {{provider.id}}</div>
-        <div class="name">{{provider.name}}</div>
-        <div class="address">{{provider.address}}</div>
-        <div class="phone">{{provider.phone}}</div>
-        <button (click)="onSave(provider)">Save</button>
-      </div>
+      <contact-card [provider]="provider"></contact-card> 
+      <button class="save"(click)="onSave(provider)">Save</button>
     </li>
   </ul>
 
   <h2>Saved Providers</h2>
   <ul class="saved"> 
-    <li *ngFor="let savedProvider of selectedProviders">
-      <div class="card">
-        <div class="id">ID: {{savedProvider.id}}</div>
-        <div class="name">{{savedProvider.name}}</div>
-        <div class="address">{{savedProvider.address}}</div>
-        <div class="phone">{{savedProvider.phone}}</div>
-        <button (click)="onRemove(savedProvider)"> Remove</button>
-      </div>
+    <li *ngFor="let provider of selectedProviders">
+      <contact-card [provider]="provider"></contact-card> 
+      <button class="remove" (click)="onRemove(provider)">Remove</button>
     </li>
   </ul>
 
