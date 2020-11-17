@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Provider } from '../provider';
 
 @Component({
   selector: 'app-list',
@@ -7,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListComponent implements OnInit {
 
-  public selectedProviders = [];
-  public unselectedProviders = [
+  public selectedProviders: Provider[] = [];
+  public unselectedProviders: Provider[] = [
     {
       id: '1',
       name: 'John',
@@ -28,6 +29,21 @@ export class ListComponent implements OnInit {
       phone: '4343219384'
     }
   ];
+  
+
+  onSave(selectedProvider: Provider) {
+    console.log("selected " + selectedProvider.name);
+    this.selectedProviders.push(selectedProvider);
+    var index = this.unselectedProviders.indexOf(selectedProvider);
+    this.unselectedProviders.splice(index, 1);
+    }
+
+  onRemove(removedProvider: Provider) {
+    console.log("removing " + removedProvider.name);
+    this.unselectedProviders.push(removedProvider);
+    var index = this.selectedProviders.indexOf(removedProvider);
+    this.selectedProviders.splice(index, 1);
+  }
 
   constructor() {}
 
