@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { Provider } from '../provider'
+import { ProviderService } from '../provider.service';
 
 @Component({
   selector: 'contact-card',
@@ -10,9 +11,18 @@ export class ContactCardComponent implements OnInit {
 
   @Input() provider: Provider; 
 
-  constructor() { }
+  @Input() saved: boolean;
+
+
+  constructor(private providerService: ProviderService) { }
 
   ngOnInit() {
+    
   }
+
+  private onRemove(provider): void {
+    this.providerService.removeProvider(provider)
+  }
+
 
 }

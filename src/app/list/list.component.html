@@ -2,16 +2,14 @@
   <h2>Providers</h2>
   <ul class="providers"> 
     <li *ngFor="let provider of unselectedProviders">
-      <contact-card [provider]="provider"></contact-card> 
-      <button class="save"(click)="onSave(provider)">Save</button>
+      <contact-card [provider]="provider" [saved]="false" (click)="onSave(provider)"></contact-card> 
     </li>
   </ul>
 
   <h2>Saved Providers</h2>
   <ul class="saved"> 
-    <li *ngFor="let provider of selectedProviders">
-      <contact-card [provider]="provider"></contact-card> 
-      <button class="remove" (click)="onRemove(provider)">Remove</button>
+    <li *ngFor="let provider of savedProviders">
+      <contact-card [provider]="provider" [saved]="true"></contact-card> 
     </li>
   </ul>
 

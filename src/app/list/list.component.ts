@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Provider } from '../provider';
-import { PROVIDERS } from '../providers-list'
+import { ProviderService } from '../provider.service';
 
 @Component({
   selector: 'app-list',
@@ -9,27 +9,28 @@ import { PROVIDERS } from '../providers-list'
 })
 export class ListComponent implements OnInit {
 
-  providers = PROVIDERS;
-  public selectedProviders: Provider[] = [];
-  public unselectedProviders = this.providers;
 
-
-  constructor() {}
-
-  ngOnInit() {}
-
-  onSave(selectedProvider: Provider) {
-      console.log(selectedProvider);
-      console.log("moving to saved")
-      this.selectedProviders.push(selectedProvider);
-      var index = this.unselectedProviders.indexOf(selectedProvider);
-      this.unselectedProviders.splice(index, 1);
+  unselectedProviders: Provider[];
+  savedProviders: Provider[];
+  
+  constructor(private providerService: ProviderService) {
   }
 
-  onRemove(selectedProvider: Provider){this.unselectedProviders.push(selectedProvider);
-      var index = this.selectedProviders.indexOf(selectedProvider);
-      this.selectedProviders.splice(index, 1);
-    }
+  ngOnInit() {
+    this.unselectedProviders = this.providerService.getUnselected();
+    this.savedProviders = this.providerService.getSaved();
+  
+  }
+
+  onSave(provider): void { 
+    this.providerService.saveProvider(provider);
+    this.unselectedProviders = this.providerService.getUnselected();
+    this.savedProviders = this.providerService.getSaved();
+
+  }
+
+  
+
   }
 
 
