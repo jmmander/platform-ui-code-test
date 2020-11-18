@@ -1,3 +1,6 @@
+//Author: Jacqueline Mander
+//Email: jmzmander@gmail.com
+
 import { Component, OnInit, Input } from '@angular/core';
 import { Provider } from '../provider';
 import { ProviderService } from '../provider.service';

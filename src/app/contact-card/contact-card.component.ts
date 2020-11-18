@@ -1,3 +1,7 @@
+//Author: Jacqueline Mander
+//Email: jmzmander@gmail.com
+
+
 import { Component, OnInit, Input} from '@angular/core';
 import { Provider } from '../provider'
 import { ProviderService } from '../provider.service';
@@ -9,7 +13,9 @@ import { ProviderService } from '../provider.service';
 })
 export class ContactCardComponent implements OnInit {
 
+
   @Input() provider: Provider; 
+
 //saved boolean value is passed down from list component, determines if X is required.
   @Input() saved: boolean;
 
