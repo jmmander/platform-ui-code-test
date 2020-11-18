@@ -10,7 +10,7 @@ import { ProviderService } from '../provider.service';
 export class ContactCardComponent implements OnInit {
 
   @Input() provider: Provider; 
-
+//saved boolean value is passed down from list component, determines if X is required.
   @Input() saved: boolean;
 
 
@@ -20,7 +20,8 @@ export class ContactCardComponent implements OnInit {
     
   }
 
-  private onRemove(provider): void {
+//removes provider from savedProviders and into unselectedProviders
+   onRemove(provider): void {
     this.providerService.removeProvider(provider)
   }
 

@@ -2,7 +2,7 @@
   <h2>Providers</h2>
   <ul class="providers"> 
     <li *ngFor="let provider of unselectedProviders">
-      <contact-card [provider]="provider" [saved]="false" (click)="onSave(provider)"></contact-card> 
+      <contact-card class="hoverable" [provider]="provider" [saved]="false" (click)="onSave(provider)"></contact-card> 
     </li>
   </ul>
 

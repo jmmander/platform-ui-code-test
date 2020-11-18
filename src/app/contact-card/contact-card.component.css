@@ -3,4 +3,17 @@
     max-width: 300px;
     text-align: center;
     padding: 15px 5px;
+    
   }
+
+#remove {
+    margin-left: 95%;
+    font-weight: bolder;
+    
+    
+}
+
+.card:hover #remove{
+    color: red;
+}
+

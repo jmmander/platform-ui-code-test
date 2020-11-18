@@ -9,13 +9,14 @@ export class ProviderService {
 
   constructor() { }
 
-  savedProviders = this.getSaved();
+  savedProviders: Provider[] = this.getSaved();
   
-  unselectedProviders = this.getUnselected();
+  unselectedProviders: Provider[] = this.getUnselected()
 
-  providers = this.getProviders();
+  providers: Provider[] = this.getProviders()
 
   getProviders(): Provider[] {
+    this.providers = PROVIDERS;
     return PROVIDERS;
   }
 
@@ -33,7 +34,6 @@ export class ProviderService {
 
   getSaved(): Provider[] {
     let localStorageItem = JSON.parse(localStorage.getItem('saved'));
-    console.log(localStorageItem)
     if (localStorageItem == null) {
       this.savedProviders = [];
       } 

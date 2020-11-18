@@ -1,41 +1,69 @@
 import { ListComponent } from './list.component';
+import { ProviderService } from '../provider.service'
+import { PROVIDERS } from '../providers-list'
+import { Provider } from '../provider';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {ContactCardComponent} from '../contact-card/contact-card.component'
 
 describe('ListComponent', () => {
+  
   let component: ListComponent;
+  let service: ProviderService
 
   beforeEach(() => {
-    component = new ListComponent();
+    service = new ProviderService();
+    component = new ListComponent(service);
+    localStorage.clear();
+    service.savedProviders = [];
+    service.unselectedProviders = PROVIDERS;
+
+    component.ngOnInit();
   });
+
+  afterEach(() => {
+    localStorage.clear();
+    service.savedProviders = [];
+    service.unselectedProviders = PROVIDERS;
+  })
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('unselected providers', () => {
-    it('should have an initial length of 3', () => {
-      expect(component.unselectedProviders.length).toEqual(3);
-    });
-
-    it('should have an id', () => {
-      expect(component.unselectedProviders[0].id).toEqual('1');
-    });
-
-    it('should have a name', () => {
-      expect(component.unselectedProviders[0].name).toEqual('John');
-    });
-
-    it('should have an address', () => {
-      expect(component.unselectedProviders[0].address).toEqual('123 Greenway Blvd');
-    });
-
-    it('should have a phone', () => {
-      expect(component.unselectedProviders[0].phone).toEqual('8991234321');
+  describe('unselectedProviders', () => {
+    it('should have a length of 3 on first load', () => {
+      expect(component.unselectedProviders.length).toEqual(3)
     });
   });
 
-  describe('selected providers', () => {
-    it('should have no initial length', () => {
-      expect(component.selectedProviders.length).toEqual(0);
+  describe('savedProviders', () => {
+    it('should be empty on first load', () => {
+      expect(component.savedProviders.length).toEqual(0)
     });
   });
-});
+
+  describe('onSave', () => {
+    const provider: Provider = {
+      id: '1',
+      name: 'John',
+      address: '123 Greenway Blvd',
+      phone: '8991234321'
+    };
+
+    it('should move a provider from unselectedProviders to savedProviders', () => {
+      component.onSave(provider);
+      expect(component.savedProviders.length).toEqual(1);
+      expect(component.unselectedProviders.length).toEqual(2);
+    });
+
+    it('should move Johns card into savedProviders', () => {
+      component.onSave(provider);
+      expect(component.savedProviders[0].id).toEqual('1');
+      expect(component.savedProviders[0].name).toEqual('John');
+      expect(component.savedProviders[0].address).toEqual('123 Greenway Blvd');
+      expect(component.savedProviders[0].phone).toEqual('8991234321');
+    });
+    });
+  });
+  
+
